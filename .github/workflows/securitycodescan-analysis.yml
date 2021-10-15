@@ -17,6 +17,8 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
       - name: Install prerequisites
         run: |
           ./init.ps1 -UpgradePrerequisites
