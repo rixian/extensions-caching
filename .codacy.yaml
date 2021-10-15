@@ -1,3 +1,9 @@
 ---
 exclude_paths:
   - ".github/**"
+  - ".devcontainer/**"
+  - ".vscode/**"
+  - "azure-pipelines/**"
+  - "bin/**"
+  - "obj/**"
+  - "tools/**"
