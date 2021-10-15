@@ -102,3 +102,12 @@ jobs:
         shell: bash
         timeout-minutes: 3
         continue-on-error: true
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            obj/_artifacts/deployables/*
