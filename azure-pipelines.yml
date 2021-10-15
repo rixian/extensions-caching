@@ -3,8 +3,6 @@ trigger:
   branches:
     include:
     - main
-    - 'validate/*'
-    - 'release/*'
     - master
     - 'validate/*'
     - 'release/*'
@@ -25,7 +23,7 @@ variables:
   TreatWarningsAsErrors: true
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   BuildConfiguration: Release
-  codecov_token: 5e413578-757f-4178-8a3f-fa3f1ca0c2b2
+  codecov_token: 5df07080-3803-448e-9c86-1bc84ea46c90
   ci_feed: CI # Azure Artifacts feed name
   NUGET_PACKAGES: $(Agent.TempDirectory)/.nuget/packages
 
