@@ -126,8 +126,8 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "${{ env.NBGV_VERSION }}"
+          automatic_release_tag: "${{ env.NBGV_SemVer2 }}"
           prerelease: true
-          title: "v${{ env.NBGV_VERSION }}"
+          title: "v${{ env.NBGV_SemVer2 }}"
           files: |
             obj/_artifacts/deployables/*
