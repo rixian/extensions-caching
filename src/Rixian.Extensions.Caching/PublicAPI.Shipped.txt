@@ -1,7 +1,7 @@
 ﻿#nullable enable
 
 Rixian.Extensions.Caching.CacheManager
-Rixian.Extensions.Caching.CacheManager.CacheManager(Microsoft.Extensions.Caching.Memory.IMemoryCache! memoryCache, Microsoft.Extensions.Caching.Distributed.IDistributedCache! distributedCache) -> void
+Rixian.Extensions.Caching.CacheManager.CacheManager(Microsoft.Extensions.Caching.Memory.IMemoryCache! memoryCache, Microsoft.Extensions.Caching.Distributed.IDistributedCache! distributedCache, Microsoft.Extensions.Options.IOptions<Rixian.Extensions.Caching.CacheManagerOptions!>! options) -> void
 Rixian.Extensions.Caching.CacheManager.GetAsync<T>(string! key) -> System.Threading.Tasks.Task<Rixian.Extensions.Errors.Result<T>>!
 Rixian.Extensions.Caching.CacheManager.GetAsync<T>(string! key, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task<Rixian.Extensions.Errors.Result<T>>!
 Rixian.Extensions.Caching.CacheManager.GetOrSetAsync<T>(string! key, System.EntityCacheOptions! cacheOptions, System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task<Rixian.Extensions.Errors.Result<T>>!>! getValueAsync) -> System.Threading.Tasks.Task<Rixian.Extensions.Errors.Result<T>>!
@@ -11,6 +11,10 @@ Rixian.Extensions.Caching.CacheManager.RemoveAsync(string! key, System.Threading
 Rixian.Extensions.Caching.CacheManager.SetAsync<T>(string! key, T value) -> System.Threading.Tasks.Task!
 Rixian.Extensions.Caching.CacheManager.SetAsync<T>(string! key, T value, System.EntityCacheOptions! options) -> System.Threading.Tasks.Task!
 Rixian.Extensions.Caching.CacheManager.SetAsync<T>(string! key, T value, System.EntityCacheOptions? options, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task!
+Rixian.Extensions.Caching.CacheManagerOptions
+Rixian.Extensions.Caching.CacheManagerOptions.CacheManagerOptions() -> void
+Rixian.Extensions.Caching.CacheManagerOptions.SerializerOptions.get -> System.Text.Json.JsonSerializerOptions?
+Rixian.Extensions.Caching.CacheManagerOptions.SerializerOptions.set -> void
 
 Rixian.Extensions.DependencyInjection.CachingServiceCollectionExtensions
 static readonly Rixian.Extensions.Caching.CacheManager.CacheMissErrorCode -> string!
@@ -26,3 +30,4 @@ System.EntityCacheOptions.SlidingExpiration.get -> System.TimeSpan?
 System.EntityCacheOptions.SlidingExpiration.set -> void
 Rixian.Extensions.Caching.CacheManager.GetOrSetAsync<T>(string! key, System.EntityCacheOptions! cacheOptions, System.Func<System.Threading.CancellationToken, System.Threading.Tasks.Task<Rixian.Extensions.Errors.Result<T>>!>! getValueAsync, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task<Rixian.Extensions.Errors.Result<T>>!
 Rixian.Extensions.Caching.CacheManager.RefreshAsync(string! key, System.Threading.CancellationToken cancellationToken) -> System.Threading.Tasks.Task!
+static Rixian.Extensions.DependencyInjection.CachingServiceCollectionExtensions.AddManagedCaching(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services, Rixian.Extensions.Caching.CacheManagerOptions! cacheManagerOptions) -> Microsoft.Extensions.DependencyInjection.IServiceCollection!

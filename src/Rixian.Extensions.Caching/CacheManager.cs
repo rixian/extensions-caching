@@ -14,6 +14,7 @@ namespace Rixian.Extensions.Caching
     using System.Web;
     using Microsoft.Extensions.Caching.Distributed;
     using Microsoft.Extensions.Caching.Memory;
+    using Microsoft.Extensions.Options;
     using Rixian.Extensions.Errors;
     using static Rixian.Extensions.Errors.Prelude;
 
@@ -34,16 +35,19 @@ namespace Rixian.Extensions.Caching
 
         private readonly IMemoryCache memoryCache;
         private readonly IDistributedCache distributedCache;
+        private readonly IOptions<CacheManagerOptions> options;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CacheManager"/> class.
         /// </summary>
         /// <param name="memoryCache">Instace of the IMemoryCache interface.</param>
         /// <param name="distributedCache">Instace of the IDistributedCache interface.</param>
-        public CacheManager(IMemoryCache memoryCache, IDistributedCache distributedCache)
+        /// <param name="options">Options for configuring the cache manager.</param>
+        public CacheManager(IMemoryCache memoryCache, IDistributedCache distributedCache, IOptions<CacheManagerOptions> options)
         {
             this.memoryCache = memoryCache;
             this.distributedCache = distributedCache;
+            this.options = options;
         }
 
         /// <summary>
@@ -188,7 +192,7 @@ namespace Rixian.Extensions.Caching
                 {
                     activity?.AddEvent(new ActivityEvent("cache:got_from_remote"));
                     var json = Encoding.UTF8.GetString(content);
-                    T? value = JsonSerializer.Deserialize<T>(json);
+                    T? value = JsonSerializer.Deserialize<T>(json, this.options?.Value?.SerializerOptions);
 
                     if (value is null)
                     {
@@ -244,7 +248,7 @@ namespace Rixian.Extensions.Caching
             });
             activity?.AddEvent(new ActivityEvent("cache:set_memory"));
 
-            var valueBytes = JsonSerializer.SerializeToUtf8Bytes(value);
+            var valueBytes = JsonSerializer.SerializeToUtf8Bytes(value, this.options?.Value?.SerializerOptions);
             await this.distributedCache.SetAsync(
                 key,
                 valueBytes,

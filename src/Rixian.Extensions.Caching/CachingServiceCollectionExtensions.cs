@@ -19,6 +19,23 @@ namespace Rixian.Extensions.DependencyInjection
         /// <returns>The updated IServiceCollection instance.</returns>
         public static IServiceCollection AddManagedCaching(this IServiceCollection services)
         {
+            services.AddManagedCaching(new CacheManagerOptions());
+
+            return services;
+        }
+
+        /// <summary>
+        /// Registers dependencies with the IServiceCollection instance.
+        /// </summary>
+        /// <param name="services">The IServiceCollection instance to use.</param>
+        /// <param name="cacheManagerOptions">Options for configuring the cache manager.</param>
+        /// <returns>The updated IServiceCollection instance.</returns>
+        public static IServiceCollection AddManagedCaching(this IServiceCollection services, CacheManagerOptions cacheManagerOptions)
+        {
+            services.Configure<CacheManagerOptions>(o =>
+            {
+                o.SerializerOptions = cacheManagerOptions?.SerializerOptions;
+            });
             services.AddTransient<CacheManager>();
 
             return services;
