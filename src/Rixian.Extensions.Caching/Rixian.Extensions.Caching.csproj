@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>Provides cache management types for working with distributed and memory caches within your applications.</Description>
   </PropertyGroup>
 
   <ItemGroup>
