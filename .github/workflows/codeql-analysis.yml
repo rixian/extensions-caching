@@ -20,6 +20,10 @@ on:
   schedule:
     - cron: '34 9 * * 3'
 
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  BUILDCONFIGURATION: Release
+
 jobs:
   analyze:
     name: Analyze
