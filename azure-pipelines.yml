@@ -1,0 +1,35 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - main
+    - 'validate/*'
+    - 'release/*'
+    - master
+    - 'validate/*'
+    - 'release/*'
+  paths:
+    exclude:
+    - doc/
+    - '*.md'
+    - .vscode/
+    - .github/
+
+parameters:
+- name: includeMacOS
+  displayName: Build on macOS
+  type: boolean
+  default: false # macOS is often bogged down in Azure Pipelines
+
+variables:
+  TreatWarningsAsErrors: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  BuildConfiguration: Release
+  codecov_token: 5e413578-757f-4178-8a3f-fa3f1ca0c2b2
+  ci_feed: CI # Azure Artifacts feed name
+  NUGET_PACKAGES: $(Agent.TempDirectory)/.nuget/packages
+
+jobs:
+- template: azure-pipelines/build.yml
+  parameters:
+    includeMacOS: ${{ parameters.includeMacOS }}
