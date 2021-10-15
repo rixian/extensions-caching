@@ -43,7 +43,7 @@ $Artifacts |% {
     $DestinationFolder = (Join-Path (Join-Path $ArtifactStagingFolder "$($_.ArtifactName)$ArtifactNameSuffix") $_.ContainerFolder).TrimEnd('\')
     $Name = "$(Split-Path $_.Source -Leaf)"
 
-    #Write-Host "$($_.Source) -> $($_.ArtifactName)\$($_.ContainerFolder)" -ForegroundColor Yellow
+    Write-Host "$($_.Source) -> $($_.ArtifactName)\$($_.ContainerFolder)" -ForegroundColor Yellow
 
     if (-not (Test-Path $DestinationFolder)) { New-Item -ItemType Directory -Path $DestinationFolder | Out-Null }
     if (Test-Path -PathType Leaf $_.Source) { # skip folders
