@@ -103,9 +103,9 @@ jobs:
         timeout-minutes: 3
         continue-on-error: true
   create_release:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/') }}
     needs: build
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -121,19 +121,8 @@ jobs:
         with:
           name: deployables-Linux
           path: obj/_artifacts/deployables
-      - name: Release 'latest' tag
-        uses: "marvinpinto/action-automatic-releases@latest"
-        if: ${{ github.ref == 'refs/heads/main' }}
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: "Development Build"
-          files: |
-            obj/_artifacts/deployables/*
       - name: Release version tag
         uses: "marvinpinto/action-automatic-releases@latest"
-        if: ${{ github.ref == 'refs/heads/main' }}
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "${{ steps.nbgv.outputs.SemVer2 }}"
