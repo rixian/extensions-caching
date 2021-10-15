@@ -107,6 +107,13 @@ jobs:
     needs: build
     runs-on: windows-latest
     steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+      - name: Install prerequisites
+        run: |
+          ./init.ps1 -UpgradePrerequisites
+          dotnet --info
       - uses: actions/download-artifact@master
         with:
           name: deployables-Linux
@@ -128,6 +135,5 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "${{ env.NBGV_SemVer2 }}"
           prerelease: true
-          title: "v${{ env.NBGV_SemVer2 }}"
           files: |
             obj/_artifacts/deployables/*
