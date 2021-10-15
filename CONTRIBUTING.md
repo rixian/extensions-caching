@@ -9,8 +9,8 @@ with any additional questions or comments.
 
 ## Best practices
 
-* Use Windows PowerShell or [PowerShell Core][pwsh] (including on Linux/OSX) to run .ps1 scripts.
-  Some scripts set environment variables to help you, but they are only retained if you use PowerShell as your shell.
+-   Use Windows PowerShell or [PowerShell Core][pwsh] (including on Linux/OSX) to run .ps1 scripts.
+    Some scripts set environment variables to help you, but they are only retained if you use PowerShell as your shell.
 
 ## Prerequisites
 

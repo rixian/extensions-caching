@@ -16,5 +16,12 @@ namespace Rixian.Extensions.Caching
         /// Defines a static instance of ActivitySource for use in the library.
         /// </summary>
         internal static readonly ActivitySource ActivitySource = new("Rixian.Extensions.Caching", (Attribute.GetCustomAttribute(Assembly.GetAssembly(typeof(InternalUtil)), typeof(AssemblyInformationalVersionAttribute)) as AssemblyInformationalVersionAttribute)?.InformationalVersion);
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InternalUtil"/> class.
+        /// </summary>
+        protected InternalUtil()
+        {
+        }
     }
 }
