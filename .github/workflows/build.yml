@@ -102,6 +102,14 @@ jobs:
         shell: bash
         timeout-minutes: 3
         continue-on-error: true
+  create_release:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/download-artifact@master
+        with:
+          name: deployables-Linux
+          path: obj/_artifacts/deployables
       - uses: "marvinpinto/action-automatic-releases@latest"
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
