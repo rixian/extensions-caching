@@ -111,12 +111,23 @@ jobs:
         with:
           name: deployables-Linux
           path: obj/_artifacts/deployables
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Release 'latest' tag
+        uses: "marvinpinto/action-automatic-releases@latest"
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: true
           title: "Development Build"
+          files: |
+            obj/_artifacts/deployables/*
+      - name: Release version tag
+        uses: "marvinpinto/action-automatic-releases@latest"
+        if: ${{ github.ref == 'refs/heads/main' }}
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ env.NBGV_VERSION }}"
+          prerelease: true
+          title: "v${{ env.NBGV_VERSION }}"
           files: |
             obj/_artifacts/deployables/*

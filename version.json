@@ -8,5 +8,12 @@
   ],
   "release": {
     "branchName": "release/v{version}"
+  },
+  "cloudBuild": {
+    "setVersionVariables": true,
+    "setAllVariables": true,
+    "buildNumber": {
+      "enabled": true
+    }
   }
 }
